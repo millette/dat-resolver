@@ -1,0 +1,16 @@
+{
+  "name": "dat-resolver",
+  "version": "0.0.0",
+  "dependencies": {
+    "dat-dns": "^1.2.0",
+    "dat-node": "^3.3.2",
+    "kcors": "^2.2.1",
+    "koa": "^2.2.0",
+    "koa-route": "^3.2.0",
+    "parse-dat-url": "^2.0.1"
+  },
+  "scripts": {
+    "start": "n use 8.1.1 cli",
+    "now-start": "node cli"
+  }
+}
