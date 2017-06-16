@@ -1,7 +1,7 @@
 'use strict'
 
 // self
-const { DatLru } = require('./') // /lib/dat-lru
+// const { DatLru } = require('./')
 
 /*
 // npm
@@ -11,6 +11,7 @@ const route = require('koa-route')
 const cors = require('kcors')
 */
 
+/*
 let m = 0
 
 const lru = new DatLru('/tmp/false95959') // , { mkdirError: false }
@@ -33,6 +34,7 @@ lru.isReady()
     console.log('GET', m, value)
   })
   .catch(console.error)
+*/
 
 /*
 const DAT_HASH_REGEX = /^[a-z0-9]{64}$/i
@@ -44,28 +46,8 @@ const vla = (ctx, datkey) => {
   const key = obj.hostname
   if (!DAT_HASH_REGEX.test(key)) { return Promise.reject(new Error('datkey not found')) }
 
-*/
-/*
+  // my dat thing...
   return Dat('/tmp/temp-true999', { key, temp: false, sparse: true })
-    .then((dat) => new Promise((resolve, reject) => {
-      dat.joinNetwork().once('connection', () => resolve(dat))
-      setTimeout(() => reject(new Error('Timeout')), 2000)
-      // or use callback and check for
-      ***
-      dat.joinNetwork(function (err) {
-        if (err) throw err
-
-        // After the first round of network checks, the callback is called
-        // If no one is online, you can exit and let the user know.
-        if (!dat.network.connected || !dat.network.connecting) {
-          console.error('No users currently online for that key.')
-          process.exit(1)
-        }
-      })
-      ***
-    }))
-*/
-/*
 }
 
 const top = (ctx, datkey) => {

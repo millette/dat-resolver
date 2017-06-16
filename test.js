@@ -34,6 +34,15 @@ test('init dat', async t => {
   t.truthy(dat && dat.archive)
 })
 
+test('readdir dat', async t => {
+  const lru = new DatLru('/tmp/false95959', { mkdirError: false })
+  const fn = lru.get.bind(lru, '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5')
+  const dat = await lru.isReady().then(nop).then(fn)
+  const files = await dat.archive.readdir('/')
+  t.truthy(dat && dat.archive)
+  t.is(files.length, 9)
+})
+
 test('init 2 dats', async t => {
   const lru = new DatLru('/tmp/false95959', { mkdirError: false })
   const fn = lru.get.bind(lru, '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5')
@@ -47,6 +56,7 @@ test('dat eviction', async t => {
   t.plan(6)
   const k1 = '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5'
   const lru = new DatLru('/tmp/false95959', { mkdirError: false })
+  // default lru size is 2
   lru.on('dat-evict', (o) => {
     t.is(o.key, k1)
     t.is(typeof o.value, 'object')
@@ -55,6 +65,7 @@ test('dat eviction', async t => {
   const dat1 = await lru.isReady().then(nop).then(fn)
   const dat2 = await fn()
   const dat3 = await lru.get('d62aa262608e6ccfa81364764632265668a7046f25206d3ded8480f14e8b7c42')
+  // evict on 3rd
   const dat4 = await lru.get('c5d64071c632d706e07e4ab0b8f39c2af80aa07605ef73bc4c130110744e49d8')
   t.truthy(dat1 && dat1.archive)
   t.truthy(dat2 && dat2.archive)
