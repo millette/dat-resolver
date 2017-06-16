@@ -2,6 +2,7 @@
   "name": "dat-resolver",
   "version": "0.0.0",
   "dependencies": {
+    "async-lru": "^1.1.1",
     "dat-dns": "^1.2.0",
     "dat-node": "^3.3.2",
     "kcors": "^2.2.1",
@@ -13,6 +14,7 @@
     "node": ">=8"
   },
   "scripts": {
+    "dev": "n use 8.1.2 cli",
     "start": "n use 8.1.2 cli",
     "now-start": "node cli"
   }
