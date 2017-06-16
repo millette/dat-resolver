@@ -10,9 +10,14 @@ test('init', async t => {
   t.truthy(ready)
 })
 
+test('bad dir', async t => {
+  const lru = new DatLru('/tmp6/false95959')
+  await t.throws(lru.isReady(), / ENOENT: /)
+})
+
 test('not ready', async t => {
   const lru = new DatLru('/tmp/false95959', { mkdirStrict: true })
-  await t.throws(lru.isReady())
+  await t.throws(lru.isReady(), / EEXIST: /)
 })
 
 test('bad key', async t => {
