@@ -3,12 +3,16 @@
   "version": "0.0.0",
   "dependencies": {
     "async-lru": "^1.1.1",
+    "ava": "^0.19.1",
+    "coveralls": "^2.13.1",
     "dat-dns": "^1.2.0",
     "dat-node": "^3.3.2",
     "kcors": "^2.2.1",
     "koa": "^2.2.0",
     "koa-route": "^3.2.0",
-    "parse-dat-url": "^2.0.1"
+    "nyc": "^11.0.2",
+    "parse-dat-url": "^2.0.1",
+    "standard": "^10.0.2"
   },
   "engine": {
     "node": ">=8"
