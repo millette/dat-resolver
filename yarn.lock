@@ -701,8 +701,8 @@ bittorrent-dht@^7.2.1:
     safe-buffer "^5.0.1"
 
 blake2b-wasm@^1.1.0:
-  version "1.1.2"
-  resolved "https://registry.yarnpkg.com/blake2b-wasm/-/blake2b-wasm-1.1.2.tgz#5593c8ceeb802d08a4e5436d391b0a0db09fa502"
+  version "1.1.3"
+  resolved "https://registry.yarnpkg.com/blake2b-wasm/-/blake2b-wasm-1.1.3.tgz#b37272e9e95f9d85e647b1bcad9edef72c833f4a"
   dependencies:
     base64-to-uint8array "^1.0.0"
     brfs "^1.4.3"
@@ -1164,8 +1164,8 @@ dashdash@^1.12.0:
     assert-plus "^1.0.0"
 
 dat-dns@^1.2.0:
-  version "1.2.0"
-  resolved "https://registry.yarnpkg.com/dat-dns/-/dat-dns-1.2.0.tgz#1b1c532341106e2f237401dcb1083ed658a1dcba"
+  version "1.3.0"
+  resolved "https://registry.yarnpkg.com/dat-dns/-/dat-dns-1.3.0.tgz#b759e945e2b48d1d2ced2ca161d7a387927a99d9"
   dependencies:
     call-me-maybe "^1.0.1"
     concat-stream "^1.6.0"
@@ -1179,8 +1179,8 @@ dat-encoding@^4.0.1:
     safe-buffer "^5.0.1"
 
 dat-ignore@^1.0.0:
-  version "1.0.0"
-  resolved "https://registry.yarnpkg.com/dat-ignore/-/dat-ignore-1.0.0.tgz#f6d6254b798ccf402a2959c068152fa7a658a662"
+  version "1.1.0"
+  resolved "https://registry.yarnpkg.com/dat-ignore/-/dat-ignore-1.1.0.tgz#ab889f614426170b41ce1c7894d406d1dd8232eb"
   dependencies:
     anymatch "^1.3.0"
     xtend "^4.0.1"
@@ -2298,8 +2298,8 @@ hyperdrive-network-speed@^2.0.0:
     speedometer "^1.0.0"
 
 hyperdrive@^9.1.1, hyperdrive@^9.2.9:
-  version "9.4.0"
-  resolved "https://registry.yarnpkg.com/hyperdrive/-/hyperdrive-9.4.0.tgz#e262f1a564c222ead58e002e0417ece7f7c1e4c9"
+  version "9.4.1"
+  resolved "https://registry.yarnpkg.com/hyperdrive/-/hyperdrive-9.4.1.tgz#af8c638623865581bf7a54d6fec6d913d84f3ef2"
   dependencies:
     append-tree "^2.3.5"
     duplexify "^3.5.0"

@@ -1,17 +1,27 @@
 {
   "name": "dat-resolver",
   "version": "0.0.0",
+  "repository": "millette/dat-resolver",
+  "author": {
+    "name": "Robin Millette",
+    "email": "robin@millette.info",
+    "url": "http://robin.millette.info"
+  },
+  "main": "index.js",
+  "bin": "cli.js",
   "dependencies": {
     "async-lru": "^1.1.1",
-    "ava": "^0.19.1",
-    "coveralls": "^2.13.1",
     "dat-dns": "^1.2.0",
     "dat-node": "^3.3.2",
     "kcors": "^2.2.1",
     "koa": "^2.2.0",
     "koa-route": "^3.2.0",
+    "parse-dat-url": "^2.0.1"
+  },
+  "devDependencies": {
+    "ava": "^0.19.1",
+    "coveralls": "^2.13.1",
     "nyc": "^11.0.2",
-    "parse-dat-url": "^2.0.1",
     "standard": "^10.0.2"
   },
   "engine": {
@@ -19,6 +29,9 @@
   },
   "scripts": {
     "lint": "standard",
-    "dev": "standard && n use 8.1.2 cli"
+    "dev": "standard && n use 8.1.2 cli",
+    "testv8": "standard && n use 8.1.2 node_modules/.bin/nyc ava",
+    "test": "standard && nyc ava",
+    "coverage": "nyc report --reporter=text-lcov | coveralls"
   }
 }
