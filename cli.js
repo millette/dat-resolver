@@ -3,11 +3,13 @@
 // self
 const DatLru = require('./lib/dat-lru')
 
+/*
 // npm
 const parse = require('parse-dat-url')
 const Koa = require('koa')
 const route = require('koa-route')
 const cors = require('kcors')
+*/
 
 let m = 0
 

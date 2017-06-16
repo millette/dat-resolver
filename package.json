@@ -18,8 +18,7 @@
     "node": ">=8"
   },
   "scripts": {
-    "dev": "n use 8.1.2 cli",
-    "start": "n use 8.1.2 cli",
-    "now-start": "node cli"
+    "lint": "standard",
+    "dev": "standard && n use 8.1.2 cli"
   }
 }
