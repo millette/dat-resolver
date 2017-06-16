@@ -1,7 +1,7 @@
 'use strict'
 
 // self
-const DatLru = require('./lib/dat-lru')
+const { DatLru } = require('./') // /lib/dat-lru
 
 /*
 // npm
