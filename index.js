@@ -2,5 +2,6 @@
 
 // self
 const DatLru = require('./lib/dat-lru')
+const routes = require('./lib/routes')
 
-module.exports = { DatLru }
+module.exports = { DatLru, routes }
