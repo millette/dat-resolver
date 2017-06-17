@@ -15,6 +15,8 @@ const parse = require('parse-dat-url')
 const Koa = require('koa')
 const route = require('koa-route')
 const cors = require('kcors')
+const conditional = require('koa-conditional-get')
+const etag = require('koa-etag')
 
 const app = new Koa()
 
@@ -49,6 +51,9 @@ const top = (ctx, datkey) => {
     })
     .catch((e) => ctx.throw(404, e))
 }
+
+app.use(conditional())
+app.use(etag())
 
 app.use(cors({ allowMethods: 'GET' }))
 app.use(route.get('/resolve/:datkey', datKeyM.bind(null, 'dat.json')))
