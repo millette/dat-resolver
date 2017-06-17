@@ -62,3 +62,21 @@ test('top', async t => {
   t.is(typeof ctx.body.files, 'object')
   t.is(ctx.body.files.length, 2)
 })
+
+test('top bad key', async t => {
+  const readdir = (path) => Promise.resolve(['/profile.json', '/dat.json'])
+  const get = (key) => key.length === 64
+    ? Promise.resolve({ archive: { readdir } })
+    : Promise.reject(new Error('invalid dat key'))
+
+  const throwFn = function (code, err) {
+    this.threw = { code, err }
+    return Promise.reject(err)
+  }
+
+  const ctx = { datLru: { get } }
+  ctx.throw = throwFn.bind(ctx)
+
+  const dat = routes.top(ctx, '49bd04...4561e5')
+  await t.throws(dat, 'invalid dat key')
+})
