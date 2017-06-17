@@ -18,7 +18,8 @@
     "koa-conditional-get": "^2.0.0",
     "koa-etag": "^3.0.0",
     "koa-route": "^3.2.0",
-    "parse-dat-url": "^2.0.1"
+    "parse-dat-url": "^2.0.1",
+    "rimraf": "^2.6.1"
   },
   "devDependencies": {
     "ava": "^0.19.1",
