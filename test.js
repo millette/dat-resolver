@@ -24,7 +24,7 @@ test('bad key', async t => {
   const lru = new DatLru('/tmp/false95959', { mkdirError: false })
   const fn = lru.get.bind(lru, 'abc1293')
   const dat = lru.isReady().then(nop).then(fn)
-  await t.throws(dat, 'Invalid key')
+  await t.throws(dat, 'invalid dat key')
 })
 
 test('init dat', async t => {
@@ -52,7 +52,7 @@ test('init 2 dats', async t => {
   t.truthy(dat2 && dat2.archive)
 })
 
-test.only('dat eviction', async t => {
+test('dat eviction', async t => {
   t.plan(7)
   const max = 2
   const k1 = '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5'
