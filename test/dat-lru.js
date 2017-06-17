@@ -5,7 +5,6 @@ import DatLru from '../lib/dat-lru'
 
 const nop = () => Promise.resolve()
 
-// test.serial('init', async t => {
 test('init', async t => {
   const lru = new DatLru('/tmp/false95959-z')
   const ready = await lru.isReady()
@@ -21,7 +20,6 @@ test('bad dir', async t => {
   t.is(x, 'ok-nothing')
 })
 
-// test.serial('not ready', async t => {
 test('not ready', async t => {
   const lru = new DatLru('/tmp/false95959-z', { mkdirStrict: true })
   await t.throws(lru.isReady(), / EEXIST: /)
