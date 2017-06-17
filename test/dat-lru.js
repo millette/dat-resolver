@@ -1,6 +1,7 @@
 'use strict'
+
 import test from 'ava'
-import { DatLru } from './'
+import DatLru from '../lib/dat-lru'
 
 const nop = () => Promise.resolve()
 
