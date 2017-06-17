@@ -5,7 +5,8 @@ import DatLru from '../lib/dat-lru'
 
 const nop = () => Promise.resolve()
 
-test.serial('init', async t => {
+// test.serial('init', async t => {
+test('init', async t => {
   const lru = new DatLru('/tmp/false95959-z')
   const ready = await lru.isReady()
   t.truthy(ready)
@@ -20,7 +21,8 @@ test('bad dir', async t => {
   t.is(x, 'ok-nothing')
 })
 
-test.serial('not ready', async t => {
+// test.serial('not ready', async t => {
+test('not ready', async t => {
   const lru = new DatLru('/tmp/false95959-z', { mkdirStrict: true })
   await t.throws(lru.isReady(), / EEXIST: /)
   const x = await lru.cleanup()
@@ -82,7 +84,7 @@ test('dat eviction', async t => {
   t.plan(8)
   const max = 2
   const k1 = '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5'
-  const lru = new DatLru('/tmp/false95959-d', { max, mkdirError: false })
+  const lru = new DatLru('/tmp/false95959-d', { max }) // , mkdirError: false
   lru.on('dat-evict', (o) => {
     t.is(lru.keys.length, max) // default lru size (max) is 2
     t.is(o.key, k1)
@@ -114,7 +116,7 @@ test('dat eviction cleanup', async t => {
   t.plan(6)
   const max = 1
   const k1 = '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5'
-  const lru = new DatLru('/tmp/false95959-e', { max, mkdirError: false })
+  const lru = new DatLru('/tmp/false95959-e', { max }) // , mkdirError: false
   lru.on('dat-evict', (o) => {
     t.is(lru.keys.length, max)
     t.is(o.key, k1)
