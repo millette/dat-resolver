@@ -52,12 +52,13 @@ test('init 2 dats', async t => {
   t.truthy(dat2 && dat2.archive)
 })
 
-test('dat eviction', async t => {
-  t.plan(6)
+test.only('dat eviction', async t => {
+  t.plan(7)
+  const max = 2
   const k1 = '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5'
-  const lru = new DatLru('/tmp/false95959', { mkdirError: false })
-  // default lru size is 2
+  const lru = new DatLru('/tmp/false95959', { max, mkdirError: false })
   lru.on('dat-evict', (o) => {
+    t.is(lru.keys.length, max) // default lru size (max) is 2
     t.is(o.key, k1)
     t.is(typeof o.value, 'object')
   })
