@@ -34,6 +34,7 @@
     "dev": "standard && n use 8.1.2 cli",
     "testv8": "standard && n use 8.1.2 node_modules/.bin/nyc ava",
     "test": "standard && nyc ava",
+    "commit": "standard && n use 8.1.2 node_modules/.bin/ava && git commit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   }
 }
