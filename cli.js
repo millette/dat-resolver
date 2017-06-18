@@ -27,6 +27,8 @@ app.use(route.get('/resolve/:datkey', routes.datKeyM.bind(null, 'dat.json')))
 app.use(route.get('/profile/:datkey', routes.datKeyM.bind(null, 'profile.json')))
 app.use(route.get('/manifest/:datkey', routes.datKeyM.bind(null, 'manifest.json')))
 app.use(route.get('/top/:datkey', routes.top))
+app.use(route.get('/version/:datkey', routes.version))
+app.use(route.get('/peers/:datkey', routes.peers))
 app.use(route.get('/', routes.home))
 app.listen(3030)
 
