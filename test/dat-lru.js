@@ -88,7 +88,7 @@ test('dat eviction', async t => {
   const k1 = '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5'
   const lru = new DatLru('/tmp/mem95959-d', { max }) // , mkdirError: false
   lru.on('evict', (o) => {
-    t.is(lru.keys.length, max) // default lru size (max) is 2
+    t.is(lru.keys.length, max) // default lru size (max) is 10
     t.is(o.key, k1)
     t.is(typeof o.value, 'object')
   })
