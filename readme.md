@@ -7,7 +7,7 @@ A simple http interface to [dat][] with an API to retrieve meta data.
 * port: set port, defaults to 3030
 * host: set host (127.0.0.1, 0.0.0.0), defaults to 127.0.0.1
 * lru: size of last recently used cache, defaults to 15
-* fs: set to use filesystem, otherwise memory only
+* fs: directorory to use for filesystem lru, otherwise memory only
 
 ## Available API
 

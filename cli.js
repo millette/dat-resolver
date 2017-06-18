@@ -18,7 +18,7 @@ const schema = joi.object({
   lru: joi.number().integer().default(15).optional(),
   port: joi.number().integer().default(3030).optional(),
   host: joi.string().default('127.0.0.1').optional(),
-  fs: joi.boolean().truthy('').optional()
+  fs: joi.string().default('').optional()
 })
 
 const cli = clivage(schema)
@@ -27,10 +27,8 @@ const cli = clivage(schema)
 const routes = require('./lib/routes')
 const LRU = require(cli.flags.fs ? './lib/dat-lru-fs' : './lib/dat-lru')
 
-const lru = new LRU(pathResolve(__dirname, 'dat-tests'), { max: cli.flags.lru, mkdirError: false })
-
 const app = new Koa()
-app.context.datLru = lru
+app.context.datLru = new LRU(pathResolve(__dirname, cli.flags.fs), { max: cli.flags.lru, mkdirError: false })
 app.context.cli = cli
 app.use(conditional())
 app.use(etag())
