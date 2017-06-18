@@ -15,7 +15,9 @@ const joi = require('joi')
 const clivage = require('clivage')
 
 const schema = joi.object({
+  lru: joi.number().integer().default(15).optional(),
   port: joi.number().integer().default(3030).optional(),
+  host: joi.string().default('127.0.0.1').optional(),
   fs: joi.boolean().truthy('').optional()
 })
 
@@ -25,7 +27,7 @@ const cli = clivage(schema)
 const routes = require('./lib/routes')
 const LRU = require(cli.flags.fs ? './lib/dat-lru-fs' : './lib/dat-lru')
 
-const lru = new LRU(pathResolve(__dirname, 'dat-tests'), { max: 15, mkdirError: false })
+const lru = new LRU(pathResolve(__dirname, 'dat-tests'), { max: cli.flags.lru, mkdirError: false })
 
 const app = new Koa()
 app.context.datLru = lru
@@ -41,4 +43,8 @@ if (cli.flags.fs) { app.use(route.get('/top/:datkey', routes.top)) }
 app.use(route.get('/version/:datkey', routes.version))
 app.use(route.get('/peers/:datkey', routes.peers))
 app.use(route.get('/', routes.home))
-app.listen(cli.flags.port)
+
+// FIXME: catch port in use error
+app.listen(cli.flags.port, cli.flags.host, function () {
+  console.log('Ready!', this.address())
+})
