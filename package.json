@@ -11,8 +11,10 @@
   "bin": "cli.js",
   "dependencies": {
     "async-lru": "^1.1.1",
+    "clivage": "^0.1.2",
     "dat-dns": "^1.2.0",
     "dat-node": "^3.3.2",
+    "joi": "^10.6.0",
     "kcors": "^2.2.1",
     "koa": "^2.2.0",
     "koa-conditional-get": "^2.0.0",
