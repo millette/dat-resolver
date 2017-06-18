@@ -83,7 +83,7 @@ test.serial('dat eviction', async t => {
   const max = 2
   const k1 = '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5'
   const lru = new DatLru('/tmp/false95959-d', { max }) // , mkdirError: false
-  lru.on('dat-evict', (o) => {
+  lru.on('evict-fs', (o) => {
     t.is(lru.keys.length, max) // default lru size (max) is 2
     t.is(o.key, k1)
     t.is(typeof o.value, 'object')
@@ -95,7 +95,7 @@ test.serial('dat eviction', async t => {
   // evict on 3rd
   const dat4 = await lru.get('c5d64071c632d706e07e4ab0b8f39c2af80aa07605ef73bc4c130110744e49d8')
 
-  // allow some time for the dat-evict event to happen
+  // allow some time for the evict-fs event to happen
   const p = new Promise((resolve, reject) => {
     setTimeout(() => {
       t.truthy(dat1 && dat1.archive)
@@ -115,7 +115,7 @@ test.serial('dat eviction cleanup', async t => {
   const max = 1
   const k1 = '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5'
   const lru = new DatLru('/tmp/false95959-e', { max }) // , mkdirError: false
-  lru.on('dat-evict', (o) => {
+  lru.on('evict-fs', (o) => {
     t.is(lru.keys.length, max)
     t.is(o.key, k1)
     t.is(typeof o.value, 'object')
@@ -125,7 +125,7 @@ test.serial('dat eviction cleanup', async t => {
   // evict on 2nd
   const dat2 = await lru.get('d62aa262608e6ccfa81364764632265668a7046f25206d3ded8480f14e8b7c42')
 
-  // allow some time for the dat-evict event to happen
+  // allow some time for the evict-fs event to happen
   const p = new Promise((resolve, reject) => {
     setTimeout(() => {
       t.truthy(dat1 && dat1.archive)
