@@ -87,3 +87,39 @@ test('home', async t => {
   t.is(ctx.type, 'text/html')
   t.truthy(ctx.body.length)
 })
+
+test('version', async t => {
+  const get = (key) => key.length === 64
+    ? Promise.resolve({ version: 123 })
+    : Promise.reject(new Error('invalid dat key'))
+
+  const throwFn = function (code, err) {
+    this.threw = { code, err }
+    return Promise.reject(err)
+  }
+
+  const ctx = { datLru: { get } }
+  ctx.throw = throwFn.bind(ctx)
+  await routes.version(ctx, '26620b74b6878c872ff243a151974aad5d52349bda12a02c19098421fce8bef4')
+  t.is(ctx.type, 'application/json')
+  t.is(ctx.body.version, 123)
+})
+
+test('peers', async t => {
+  const get = (key) => key.length === 64
+    ? Promise.resolve({ network: { connected: 2, connecting: 3 } })
+    : Promise.reject(new Error('invalid dat key'))
+
+  const throwFn = function (code, err) {
+    this.threw = { code, err }
+    return Promise.reject(err)
+  }
+
+  const ctx = { datLru: { get } }
+  ctx.throw = throwFn.bind(ctx)
+  await routes.peers(ctx, '26620b74b6878c872ff243a151974aad5d52349bda12a02c19098421fce8bef4')
+  t.is(ctx.type, 'application/json')
+  t.truthy(ctx.body.peers)
+  t.is(ctx.body.peers.connected, 2)
+  t.is(ctx.body.peers.connecting, 3)
+})
