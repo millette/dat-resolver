@@ -17,7 +17,8 @@ const etag = require('koa-etag')
 
 const app = new Koa()
 
-app.context.datLru = new DatLru(pathResolve(__dirname, 'dat-tests'), { mkdirError: false })
+const lru = new DatLru(pathResolve(__dirname, 'dat-tests'), { max: 15, mkdirError: false })
+app.context.datLru = lru
 
 app.use(conditional())
 app.use(etag())
@@ -25,4 +26,7 @@ app.use(cors({ allowMethods: 'GET' }))
 app.use(route.get('/resolve/:datkey', routes.datKeyM.bind(null, 'dat.json')))
 app.use(route.get('/profile/:datkey', routes.datKeyM.bind(null, 'profile.json')))
 app.use(route.get('/top/:datkey', routes.top))
+app.use(route.get('/', routes.home))
 app.listen(3030)
+
+console.log('app.env:', app.env)
