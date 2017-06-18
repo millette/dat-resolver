@@ -5,7 +5,7 @@ import DatLru from '../lib/dat-lru'
 
 const nop = () => Promise.resolve()
 
-test('init', async t => {
+test.serial('init', async t => {
   const lru = new DatLru('/tmp/false95959-z')
   const ready = await lru.isReady()
   t.truthy(ready)
@@ -13,21 +13,21 @@ test('init', async t => {
   t.is(x, 'ok-nothing')
 })
 
-test('bad dir', async t => {
+test.serial('bad dir', async t => {
   const lru = new DatLru('/tmp6/false95959-z')
   await t.throws(lru.isReady(), / ENOENT: /)
   const x = await lru.cleanup()
   t.is(x, 'ok-nothing')
 })
 
-test('not ready', async t => {
+test.serial('not ready', async t => {
   const lru = new DatLru('/tmp/false95959-z', { mkdirStrict: true })
   await t.throws(lru.isReady(), / EEXIST: /)
   const x = await lru.cleanup()
   t.is(x, 'ok-nothing')
 })
 
-test('bad key', async t => {
+test.serial('bad key', async t => {
   const lru = new DatLru('/tmp/false95959-x')
   const fn = lru.get.bind(lru, 'abc1293')
   const dat = lru.isReady().then(nop).then(fn)
@@ -36,7 +36,7 @@ test('bad key', async t => {
   t.is(x, 'ok-nothing')
 })
 
-test('cleanup init dat', async t => {
+test.serial('cleanup init dat', async t => {
   const lru = new DatLru('/tmp/false95959-w')
   const fn = lru.get.bind(lru, '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5')
   const dat = await lru.isReady().then(nop).then(fn)
@@ -45,7 +45,7 @@ test('cleanup init dat', async t => {
   t.is(x, 'ok-1')
 })
 
-test('readdir dat', async t => {
+test.serial('readdir dat', async t => {
   const lru = new DatLru('/tmp/false95959-a')
   const fn = lru.get.bind(lru, '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5')
   const dat = await lru.isReady().then(nop).then(fn)
@@ -56,7 +56,7 @@ test('readdir dat', async t => {
   t.is(x, 'ok-1')
 })
 
-test('init dat twice', async t => {
+test.serial('init dat twice', async t => {
   const lru = new DatLru('/tmp/false95959-b')
   const fn = lru.get.bind(lru, '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5')
   const dat1 = await lru.isReady().then(nop).then(fn)
@@ -67,7 +67,7 @@ test('init dat twice', async t => {
   t.is(x, 'ok-1')
 })
 
-test('init 2 dats', async t => {
+test.serial('init 2 dats', async t => {
   const lru = new DatLru('/tmp/false95959-c')
   const fn = lru.get.bind(lru, '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5')
   const dat1 = await lru.isReady().then(nop).then(fn)
@@ -78,7 +78,7 @@ test('init 2 dats', async t => {
   t.is(x, 'ok-2')
 })
 
-test('dat eviction', async t => {
+test.serial('dat eviction', async t => {
   t.plan(8)
   const max = 2
   const k1 = '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5'
@@ -110,7 +110,7 @@ test('dat eviction', async t => {
   t.is(x, 'ok-2')
 })
 
-test('dat eviction cleanup', async t => {
+test.serial('dat eviction cleanup', async t => {
   t.plan(6)
   const max = 1
   const k1 = '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5'
@@ -138,7 +138,7 @@ test('dat eviction cleanup', async t => {
   t.is(x, 'ok-1')
 })
 
-test('dat not found', async t => {
+test.serial('dat not found', async t => {
   const lru = new DatLru('/tmp/false95959-f')
   const fn = lru.get.bind(lru, '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e9')
   const dat = lru.isReady().then(nop).then(fn)
