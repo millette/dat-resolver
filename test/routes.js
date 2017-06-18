@@ -80,3 +80,10 @@ test('top bad key', async t => {
   const dat = routes.top(ctx, '49bd04...4561e5')
   await t.throws(dat, 'invalid dat key')
 })
+
+test('home', async t => {
+  const ctx = {}
+  await routes.home(ctx)
+  t.is(ctx.type, 'text/html')
+  t.truthy(ctx.body.length)
+})
