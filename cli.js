@@ -6,7 +6,9 @@ if (!util.promisify) { throw new Error('Requires node 8.x') }
 const pathResolve = require('path').resolve
 
 // self
-const { DatLru, routes } = require('./')
+// const { DatLru, routes } = require('./')
+const DatLru = require('./lib/dat-lru')
+const routes = require('./lib/routes')
 
 // npm
 const Koa = require('koa')
@@ -26,7 +28,9 @@ app.use(cors({ allowMethods: 'GET' }))
 app.use(route.get('/resolve/:datkey', routes.datKeyM.bind(null, 'dat.json')))
 app.use(route.get('/profile/:datkey', routes.datKeyM.bind(null, 'profile.json')))
 app.use(route.get('/manifest/:datkey', routes.datKeyM.bind(null, 'manifest.json')))
-app.use(route.get('/top/:datkey', routes.top))
+if (DatLru.cleanDat) {
+  app.use(route.get('/top/:datkey', routes.top))
+}
 app.use(route.get('/version/:datkey', routes.version))
 app.use(route.get('/peers/:datkey', routes.peers))
 app.use(route.get('/', routes.home))
