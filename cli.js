@@ -4,7 +4,6 @@
 const util = require('util')
 if (!util.promisify) { throw new Error('Requires node 8.x') }
 const pathResolve = require('path').resolve
-const http = require('http')
 
 // npm
 const Koa = require('koa')
@@ -45,7 +44,5 @@ app.use(route.get('/version/:datkey', routes.version))
 app.use(route.get('/peers/:datkey', routes.peers))
 app.use(route.get('/', routes.home))
 
-// catch port in use error
-http.createServer(app.callback())
+app.listen(cli.flags.port, cli.flags.host, function () { console.log('Ready!', this.address()) })
   .on('error', (err) => { console.error(app.env === 'production' ? err.toString() : err) })
-  .listen(cli.flags.port, cli.flags.host, function () { console.log('Ready!', this.address()) })
