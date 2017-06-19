@@ -35,6 +35,8 @@
   },
   "scripts": {
     "lint": "standard",
+    "start": "NODE_ENV=production n use 8.1.2 cli",
+    "now-start": "NODE_ENV=production node cli",
     "dev": "standard && n use 8.1.2 cli",
     "testv8": "standard && n use 8.1.2 node_modules/.bin/nyc ava",
     "test": "standard && nyc ava",
