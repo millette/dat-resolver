@@ -13,22 +13,6 @@ test('init', async t => {
   t.is(x, 'ok-nothing')
 })
 
-/*
-test('bad dir', async t => {
-  const lru = new DatLru('/tmp6/false95959-z')
-  await t.throws(lru.isReady(), / ENOENT: /)
-  const x = await lru.cleanup()
-  t.is(x, 'ok-nothing')
-})
-
-test('not ready', async t => {
-  const lru = new DatLru('/tmp/mem95959-z', { mkdirStrict: true })
-  await t.throws(lru.isReady(), / EEXIST: /)
-  const x = await lru.cleanup()
-  t.is(x, 'ok-nothing')
-})
-*/
-
 test('bad key', async t => {
   const lru = new DatLru('/tmp/mem95959-x')
   const fn = lru.get.bind(lru, 'abc1293')
@@ -46,19 +30,6 @@ test('cleanup init dat', async t => {
   const x = await lru.cleanup()
   t.is(x, 'ok-nothing')
 })
-
-/*
-test('readdir dat', async t => {
-  const lru = new DatLru('/tmp/mem95959-a')
-  const fn = lru.get.bind(lru, '49bd045de3beb9abcb7272967e2fb16e07b96c06e15cd814f703e8581d4561e5')
-  const dat = await lru.isReady().then(nop).then(fn)
-  const files = await dat.archive.readdir('/')
-  t.truthy(dat && dat.archive)
-  t.is(files.length, 9)
-  const x = await lru.cleanup()
-  t.is(x, 'ok-nothing')
-})
-*/
 
 test('init dat twice', async t => {
   const lru = new DatLru('/tmp/mem95959-b')
