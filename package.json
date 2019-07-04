@@ -35,12 +35,12 @@
   },
   "scripts": {
     "lint": "standard",
-    "start": "NODE_ENV=production n use 8.2.1 cli",
+    "start": "NODE_ENV=production node cli",
     "now-start": "NODE_ENV=production node cli",
-    "dev": "standard && n use 8.2.1 cli",
-    "testv8": "standard && n use 8.2.1 node_modules/.bin/nyc ava",
+    "dev": "standard && node cli",
     "test": "standard && nyc ava",
-    "commit": "standard && n use 8.2.1 node_modules/.bin/ava && git commit",
+    "commit": "standard && ava && git commit",
     "coverage": "nyc report --reporter=text-lcov | coveralls"
   }
 }
+

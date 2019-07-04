@@ -1,8 +1,8 @@
 'use strict'
 
 // core
-const util = require('util')
-if (!util.promisify) { throw new Error('Requires node 8.x') }
+// const util = require('util')
+// if (!util.promisify) { throw new Error('Requires node 8.x') }
 const pathResolve = require('path').resolve
 
 // npm
